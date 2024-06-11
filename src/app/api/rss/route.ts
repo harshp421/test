@@ -34,10 +34,11 @@ import { parseStringPromise } from 'xml2js';
 
 export async function GET(req: NextRequest) {
   try {
-    const query = req.nextUrl.searchParams.get('search');
-    const  q = req.nextUrl.searchParams.get('q');
-    const sort= req.nextUrl.searchParams.get('sort');
-
+    const { searchParams } = new URL(req.url);
+    const query = searchParams.get('search') || '';
+    const q = searchParams.get('q') || '';
+    const sort = searchParams.get('sort') || '';
+    
     const fetchUrl = `https://indiankanoon.org/feeds/search/${query} sortby:${sort} doctypes:${q === 'true ' ? 'judgments' : ''} /`;
     const response = await fetch(fetchUrl);
     const data = await response.text();
