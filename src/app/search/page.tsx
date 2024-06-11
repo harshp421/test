@@ -512,7 +512,7 @@ const SearchPage = () => {
             )}
 
             <div className="mt-5">
-              <h2 className="text-2xl bg-custome text-white p-5 rounded-xl">RSS Feed Results</h2>
+              <h2 className="text-2xl bg-custome text-white p-5 rounded-xl">RSS Feed Results jod bee</h2>
               {isRssLoading ? (
                 <Loader />
               ) : rssError ? (
