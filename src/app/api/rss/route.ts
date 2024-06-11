@@ -21,10 +21,11 @@ export async function GET(req: NextRequest) {
     const data = await response.text();
  
     try {
-      const result = await parseStringPromise(data);
-      console.log(result)
-      return NextResponse.json({ data: result });
+   //   const result = await parseStringPromise(data);
+    //  console.log(result)
+      return NextResponse.json({ data: data });
     } catch (err: unknown) {
+      console.log(err, 'error');
       return NextResponse.json({ error: (err as Error).message }, { status: 420 });
     }
   } catch (error: any) {
