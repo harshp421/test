@@ -1,10 +1,13 @@
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0;
 import { NextRequest, NextResponse } from "next/server";
 import { parseStringPromise } from 'xml2js';
 
 export async function GET(req: NextRequest) {
   try {
+
+
     const { searchParams } = new URL(req.url);
     const query = searchParams.get('search') || '';
     const q = searchParams.get('q') || '';
