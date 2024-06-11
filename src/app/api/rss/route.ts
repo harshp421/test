@@ -18,11 +18,11 @@ export async function GET(req: NextRequest) {
 
     const fetchUrl = `https://indiankanoon.org/feeds/search/${query} sortby:${sort} doctypes:${q === 'true ' ? 'judgments' : ''} /`;
     const response = await fetch(fetchUrl);
-    const data = await response.text();
+    // const data = await response.text();
 
     try {
      // const result = await parseStringPromise(data);
-      return NextResponse.json({ data: data });
+      return NextResponse.json({ data: response });
     } catch (err: unknown) {
       return NextResponse.json({ error: (err as Error).message });
     }
