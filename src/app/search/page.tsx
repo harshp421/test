@@ -50,7 +50,6 @@ const SearchPage = () => {
       const feedUrl = `/api/rss?search=${query}&q=${getJudgements}&sort=${rssOption.value}`;
       const response = await fetch(feedUrl);
       const data = await response.json();
-      console.log(data,"data")
       return data.data;
     } catch (e) {
       console.log(e)
