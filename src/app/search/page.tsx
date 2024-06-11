@@ -293,6 +293,8 @@ import SearchResultList from '@/components/shared/SearchResultList';
 import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
 
+
+
 const SearchPage = () => {
   const [mounted, setMounted] = useState(false);
   const searchParams = useSearchParams();
@@ -322,13 +324,18 @@ const SearchPage = () => {
     e.preventDefault();
     router.push('/search?q=' + searchquery);
   };
+
+  const fetchData = async (query: any, getJudgements: any, rssOption: any) => {
+    const feedUrl = `/api/rss?search=${query}&q=${getJudgements}&sort=${rssOption.value}`;
+    const response = await fetch(feedUrl);
+    const data = await response.json();
+    return data.data;
+  }
   const fetchRSSFeed = async (query: string) => {
-    setIsRssLoading(true);
+  setIsRssLoading(true);
     try {
-      const feedUrl = `/api/rss?search=${query}&q=${getJudgements}&sort=${rssOption.value}`;
-      const response = await fetch(feedUrl);
-      const data = await response.json();
-      const feed = await data.data;
+
+      const feed = await fetchData(query, getJudgements, rssOption)
       setRssResponce(feed.rss.channel[0])
       setRssItems(feed.rss.channel[0].item);
       setRssError(null);
@@ -474,7 +481,7 @@ const SearchPage = () => {
                   </Button>
                 </span>
               </form>
-              
+
             </div>
             <div className="flex justify-start items-center mb-3 ms-2">
               {mounted && <h1 className="mt-3 text-2xl">Search Results for &quot;{query}&quot; in &quot;{selectedSearchOption.label}&quot; table</h1>}
