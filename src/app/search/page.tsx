@@ -575,6 +575,7 @@ const SearchPage = () => {
           </div>
         </div>
       )}
+      
     </Suspense>
   );
 };
