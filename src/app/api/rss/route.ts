@@ -17,12 +17,18 @@ export async function GET(req: NextRequest) {
     const sort = searchParams.get('sort') || '';
 
     const fetchUrl = `https://indiankanoon.org/feeds/search/${query} sortby:${sort} doctypes:${q === 'true ' ? 'judgments' : ''} /`;
-    const response = await fetch(fetchUrl);
-    // const data = await response.text();
+    const response = await fetch(fetchUrl,{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/xml',
+      },
+    });
+     const data = await response.text();
+    console.log(data);
 
     try {
      // const result = await parseStringPromise(data);
-      return NextResponse.json({ data: response });
+      return NextResponse.json({ data: data  });
     } catch (err: unknown) {
       return NextResponse.json({ error: (err as Error).message });
     }
