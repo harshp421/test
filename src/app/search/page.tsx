@@ -286,7 +286,6 @@ import { rssOprion, useDataState } from '@/context/dataContext';
 import { options, useOptions } from '@/context/optionContext';
 import { API_URL } from '@/utils/constant';
 import Link from 'next/link';
-import SearchBar from '@/components/shared/SearchBar';
 import Loader from '@/components/shared/Loader';
 import Error from '@/components/shared/Error';
 import SearchResultList from '@/components/shared/SearchResultList';

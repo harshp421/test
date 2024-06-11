@@ -29,6 +29,9 @@
 // }
 
 
+export const dynamic = 'force-dynamic'
+
+
 import { NextRequest, NextResponse } from "next/server";
 import { parseStringPromise } from 'xml2js';
 
@@ -38,7 +41,7 @@ export async function GET(req: NextRequest) {
     const query = searchParams.get('search') || '';
     const q = searchParams.get('q') || '';
     const sort = searchParams.get('sort') || '';
-    
+
     const fetchUrl = `https://indiankanoon.org/feeds/search/${query} sortby:${sort} doctypes:${q === 'true ' ? 'judgments' : ''} /`;
     const response = await fetch(fetchUrl);
     const data = await response.text();
