@@ -1,13 +1,16 @@
-
 export const dynamic = 'force-dynamic'
-export const revalidate = 0;
-import { NextRequest, NextResponse } from "next/server";
-import { parseStringPromise } from 'xml2js';
 
+import { NextRequest, NextResponse } from "next/server";
+import { convertableToString, parseString } from 'xml2js';
+
+const parseStringPromise = (data: string | convertableToString) => new Promise((resolve, reject) => {
+  parseString(data, (err, result) => {
+    if (err) reject(err);
+    else resolve(result);
+  });
+});
 export async function GET(req: NextRequest) {
   try {
-
-
     const { searchParams } = new URL(req.url);
     const query = searchParams.get('search') || '';
     const q = searchParams.get('q') || '';
