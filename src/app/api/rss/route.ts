@@ -19,14 +19,12 @@ export async function GET(req: NextRequest) {
     const fetchUrl = `https://indiankanoon.org/feeds/search/${query} sortby:${sort} doctypes:${q === 'true ' ? 'judgments' : ''} /`;
     const response = await fetch(fetchUrl);
     const data = await response.text();
- 
+
     try {
-   //   const result = await parseStringPromise(data);
-    //  console.log(result)
-      return NextResponse.json({ data: data });
+      const result = await parseStringPromise(data);
+      return NextResponse.json({ data: result });
     } catch (err: unknown) {
-      console.log(err, 'error');
-      return NextResponse.json({ error: (err as Error).message }, { status: 420 });
+      return NextResponse.json({ error: (err as Error).message });
     }
   } catch (error: any) {
     return NextResponse.json({ error: error.message });

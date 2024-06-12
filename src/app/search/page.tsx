@@ -47,10 +47,11 @@ const SearchPage = () => {
 
   const fetchData = async (query: any, getJudgements: any, rssOption: any) => {
     try {
-      const feedUrl = `/api/rss?search=${query}&q=${getJudgements}&sort=${rssOption.value}`;
+      const feedUrl = `https://indiankanoon.org/feeds/search/all%20ipc%20sections%20sortby:%20mostrecent/`;
       const response = await fetch(feedUrl);
-      const data = await response.json();
-      return data.data;
+       console.log(response,"responce")
+      //  const data = await response.json();
+     // return data.data;
     } catch (e) {
       console.log(e)
     }
